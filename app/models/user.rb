@@ -1,3 +1,8 @@
 class User < ActiveRecord::Base
-  # attr_accessible :title, :body
+  has_and_belongs_to_many :projects
+  belongs_to :project
+  belongs_to :ticket
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :first_name, :last_name, :email, :password
 end
