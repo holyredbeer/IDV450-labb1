@@ -1,19 +1,19 @@
 class UsersController < ApplicationController
 
-def index
-  @users = User.new
-end
-
-def show
-  @user = User.find(2)
-end
-
-def login
-  if User.exists?(:email => params[:email], :password => params[:password])
-    redirect_to users_path, :notice => "Post successfully created"
-  else
-  	redirect_to projects_path(@user)
+  def index
+    @users = User.new
   end
-end
+
+  def show
+    @user = User.find(2)
+  end
+
+  before_save :create_remember_token
+
+  private
+  
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
+    end
 
 end

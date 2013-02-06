@@ -8,6 +8,11 @@ Ampta::Application.routes.draw do
     post :login, on: :collection, as: :login
   end
 
+  resources :sessions, only: [:new, :create, :destroy]
+
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+
   # match '/users/create' => 'users#create', :as => :users_create
 
   resources :projects

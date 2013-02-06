@@ -9,27 +9,36 @@
 
   <!-- Start of the nav bar content -->
   <div class="nav-collapse"><!-- Other nav bar content -->
-	<ul class="nav">
-	  <li class="active"><%= link_to 'Start', root_url %></li>
-	  <li><%= link_to 'Projekt', projects_url %></li>
-	  <li><%= link_to "Skapa projekt", :controller => "projects", :action => "new" %>
-	</ul>
+  <ul class="nav">
+    <li class="active"><%= link_to 'Start', root_url %></li>
+    <li><%= link_to 'Projekt', projects_url %></li>
+      <% if signed_in? %>
+        <li><%= link_to "Skapa projekt", :controller => "projects", :action => "new" %>
+      <% end %>
+  </ul>
 
     <!-- The drop down menu -->
     <ul class="nav pull-right">
-      <li><a href="/users/sign_up">Registrera</a></li>
       <li class="divider-vertical"></li>
       <li class="dropdown">
-        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Logga in <strong class="caret"></strong></a>
-        <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-			<%= form_for("user", :url => login_users_path, :html => { :method => :post }) do |f| %>
-				<%= f.label :email%>
-				<%= f.text_field(:email, :size => 30, :class => 'login_field', :placeholder => 'Användarnamn')%>
-				<%= f.label :password%>
-				<%= f.text_field(:password, :size => 30, :class => 'login_field', :placeholder => 'Lösenord')%>
+        <% if signed_in? %>
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Konto <strong class="caret"></strong></a>
+          <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+            <%= link_to "Sign out", signout_path, method: "delete" %>
+        <% else %>
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Logga in <strong class="caret"></strong></a>
+          <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+            <%= form_for(:session, url: sessions_path) do |f| %>
 
-				<%= f.submit "Logga in", :class => 'login_submit btn btn-primary' %>
-			<% end %>
+              <%= f.label :email %>
+              <%= f.text_field(:email, :size => 30, :class => 'login_field', :placeholder => 'Användarnamn')%>
+
+              <%= f.label :password %>
+              <%= f.text_field(:password, :size => 30, :class => 'login_field', :placeholder => 'Lösenord')%>
+
+              <%= f.submit "Logga in", :class => 'login_submit btn btn-primary' %>
+            <% end %>
+        <% end %>
         </div>
       </li>
     </ul>
