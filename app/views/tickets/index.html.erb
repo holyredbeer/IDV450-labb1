@@ -1,0 +1,6 @@
+<h1>Alla tickets</h1>
+
+<% @tickets.each do |ticket| %>
+	<%= link_to (ticket.name) %>, 
+	<%= link_to (user.description) %><br />
+<% end %>

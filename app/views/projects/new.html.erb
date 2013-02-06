@@ -1,0 +1,26 @@
+<h1>Skapa nytt projekt</h1>
+
+<%= form_for @project do |f| %>
+	<div class="text_field">
+		<%= f.label :title%>
+		<%= f.text_field :title%>
+	</div>
+	<div class="text_field">
+		<%= f.label :description%>
+		<%= f.text_field :description%>
+	</div>
+	<div class="dropdown">
+		<%= f.label :start_date%>
+		<%= date_select :start_date, :start_date %>
+	</div>
+	<div class="dropdown">
+		<%= f.label :end_date%>
+		<%= date_select :end_date, :end_date %>
+	</div>
+	<div class="select">
+		<%= f.label :title%>
+	</div>
+	<div class="submit">
+		<%= f.submit "Spara" %>
+	</div>
+<% end %>

@@ -4,5 +4,5 @@ class User < ActiveRecord::Base
   belongs_to :ticket
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :first_name, :last_name, :email, :password
+  attr_accessible :email, :password
 end

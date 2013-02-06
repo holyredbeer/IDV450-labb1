@@ -1,4 +1,3 @@
 class TicketStatus < ActiveRecord::Base
-  has_many :ticket
-  
+  has_many :tickets
 end
