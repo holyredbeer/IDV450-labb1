@@ -3,5 +3,5 @@ class Project < ActiveRecord::Base
   belongs_to :ticket
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :title, :description, :start_date, :end_date
+  attr_accessible :user_id, :title, :description, :start_date, :end_date
 end

@@ -1,17 +1,5 @@
 <h2>Welcome to AMPTA – A Minimal Project Tracking Application</h2>
 
-
-<div class="login-form">
-	<h3>Login</h3>
-	<form action="">
-		<fieldset>
-			<div class="clearfix">
-				<input type="text" placeholder="Username">
-			</div>
-			<div class="clearfix">
-				<input type="password" placeholder="Password">
-			</div>
-			<button class="btn primary" type="submit">Sign in</button>
-		</fieldset>
-	</form>
-</div>
+  <% if signed_in? %>
+    <%= link_to "Profile", user_path(current_user) %>
+  <% end %>

@@ -3,15 +3,13 @@ Ampta::Application.routes.draw do
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
-   
-  resources :users do
-    post :login, on: :collection, as: :login
-  end
 
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+
+  match '/user/tickets', to: 'tickets#show_users_tickets', as: 'show_users_tickets'
 
   # match '/users/create' => 'users#create', :as => :users_create
 

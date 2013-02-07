@@ -1,6 +1,10 @@
 <h1>Alla tickets</h1>
 
-<% @tickets.each do |ticket| %>
-	<%= link_to (ticket.name) %>, 
-	<%= link_to (user.description) %><br />
-<% end %>
+
+<div id="ticket_area">
+	<% @tickets.each do |ticket| %>
+		<h4>
+			<%= link_to ticket.title, ticket_path(ticket.id), :action => "show"%><br/>
+		</h4>
+	<% end %>
+</div>

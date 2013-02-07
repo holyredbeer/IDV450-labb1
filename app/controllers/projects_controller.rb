@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
-	  @project = Project.new(params[:project])
+	  @project = Project.new(params[:project].merge(:user_id => current_user.id))
 
 	  if @project.save
 	  	redirect_to projects_path

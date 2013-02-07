@@ -1,0 +1,10 @@
+<h3><%= @ticket.title %></h3>
+
+<div id="ticket_area">
+	<strong>Ticket-id:</strong> <%= @ticket.id %><br/>
+	<strong>Tillhör projekt:</strong> <%= @ticket.project_id %> // behöver fixas<br/>
+	<strong>Beskrivning:</strong> <%= @ticket.description %><br/>
+	<strong>Startdatum:</strong> <%= @ticket.start_date%><br/>
+	<strong>Slutdatum:</strong> <%= @ticket.end_date%><br/>
+	<strong>Status:</strong> <%= @ticket.ticket_status_id %> // behöver fixas<br/>
+</div>

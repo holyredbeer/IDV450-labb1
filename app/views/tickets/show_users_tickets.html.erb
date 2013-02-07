@@ -1,0 +1,10 @@
+<h1>Mina tickets</h1>
+
+
+<div id="ticket_area">
+	<% @tickets.each do |ticket| %>
+		<h4>
+			<%= link_to ticket.title, show_users_tickets_path(ticket.id), :action => "show"%><br/>
+		</h4>
+	<% end %>
+</div>

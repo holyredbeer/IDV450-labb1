@@ -4,3 +4,8 @@
 	<%= link_to (project.title) %>, 
 	<%= link_to (project.description) %><br />
 <% end %>
+
+<% if signed_in? %>
+  <%= link_to "Profile", user_path(current_user) %>
+  <%= current_user.first_name %>
+<% end %>
