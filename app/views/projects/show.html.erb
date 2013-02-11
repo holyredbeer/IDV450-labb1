@@ -1,0 +1,9 @@
+<h1><%= @project.title %></h1>
+
+<div id="project_area">
+	<p><strong>Beskrivning:</strong><br/><%= @project.description %></p>
+	<p><strong>Startdatum:</strong> <%= @project.start_date %></p>
+	<p><strong>Slutdatum:</strong> <%= @project.end_date %></p>
+
+	<%= button_to "Lägg till ticket", new_ticket_path, :class=> "btn edit_button" %>
+</div>

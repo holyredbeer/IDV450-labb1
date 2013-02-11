@@ -1,0 +1,12 @@
+<h1>Hantera projekt</h1>
+
+<div id="project_area">
+	<% @users_projects.each do |project| %>
+		<h4>
+			<%= link_to project.title, project_path(project), :class=> "manage_project_link" %>
+			<%= button_to "Radera", project, :method=>:delete, :class=> "btn remove_button", :confirm=>"Are you sure?" %>
+			<%= button_to "Redigera", edit_project_path(project), :class=> "btn edit_button" %>
+			<br/>
+		</h4>
+	<% end %>
+</div>

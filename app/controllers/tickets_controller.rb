@@ -8,6 +8,10 @@ def show
   @ticket = Ticket.find(params[:id])
 end
 
+def new
+  @ticket = Ticket.find(params[:id])
+end
+
 def show_users_tickets
   if params[:id]
   	@ticket = Ticket.find(params[:id])

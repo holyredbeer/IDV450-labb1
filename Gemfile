@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
 gem 'bootstrap-sass'
 
 gem 'simple_form'
@@ -28,6 +29,8 @@ gem 'simple_form'
 gem 'bootstrap-datepicker-rails'
 
 gem 'bcrypt-ruby', '3.0.1'
+
+gem "dynamic_form"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

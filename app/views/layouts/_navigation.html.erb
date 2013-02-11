@@ -13,7 +13,7 @@
     <li class="active"><%= link_to 'Start', root_url %></li>
     <li><%= link_to 'Projekt', projects_url %></li>
       <% if signed_in? %>
-        <li><%= link_to "Skapa projekt", :controller => "projects", :action => "new" %>
+        <li><%= link_to "Skapa projekt", new_project_path %>
       <% end %>
   </ul>
 
@@ -22,9 +22,10 @@
       <li class="divider-vertical"></li>
       <li class="dropdown">
         <% if signed_in? %>
-          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Konto <strong class="caret"></strong></a>
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Inloggad som: <strong><%= current_user.first_name %> </strong><strong class="caret"></strong></a>
           <div class="dropdown-menu account_dropdown">
-            <%= link_to "Mina tickets", show_users_tickets_path %><br/>
+            <%= link_to "Visa tickets", tickets_path%><br/>
+            <%= link_to "Hantera projekt", manage_projects_path %><br/>
             <%= link_to "Logga ut", signout_path, method: "delete"%>
         <% else %>
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">Logga in <strong class="caret"></strong></a>
@@ -35,7 +36,7 @@
               <%= f.text_field(:email, :size => 30, :class => 'login_field', :placeholder => 'Användarnamn')%>
 
               <%= f.label :password %>
-              <%= f.text_field(:password, :size => 30, :class => 'login_field', :placeholder => 'Lösenord')%>
+              <%= f.password_field(:password, :size => 30, :class => 'login_field', :placeholder => 'Lösenord')%>
 
               <%= f.submit "Logga in", :class => 'login_submit btn btn-primary' %>
             <% end %>

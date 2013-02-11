@@ -1,8 +1,7 @@
 <h1>Alla projekt</h1>
 
 <% @projects.each do |project| %>
-	<%= link_to (project.title) %>, 
-	<%= link_to (project.description) %><br />
+	<%= link_to (project.title), project_path(project) %><br />
 <% end %>
 
 <% if signed_in? %>

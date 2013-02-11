@@ -9,12 +9,16 @@ Ampta::Application.routes.draw do
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
-  match '/user/tickets', to: 'tickets#show_users_tickets', as: 'show_users_tickets'
-
   # match '/users/create' => 'users#create', :as => :users_create
 
+  match "/projects/manage" => "projects#manage", :as => 'manage_projects'
   resources :projects
+
+  # match 'projects/manage', to: 'projects#users_projects, as: 'manage_projects'
+  
   resources :tickets
+  resources :projects_users
+  resources :users
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

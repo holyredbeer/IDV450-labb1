@@ -1,13 +1,11 @@
 class User < ActiveRecord::Base
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name, :last_name, :email, :password
   has_secure_password
 
-  before_save :create_remember_token
-
   has_and_belongs_to_many :projects
-  belongs_to :project
-  belongs_to :ticket
+  has_many :tickets
+
+  before_save :create_remember_token
 
   validates :first_name, presence: true, length: { maximum: 24 }
   validates :last_name, presence: true, length: { maximum: 50 }

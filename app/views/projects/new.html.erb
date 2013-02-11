@@ -1,6 +1,9 @@
 <h1>Skapa nytt projekt</h1>
 
 <%= form_for @project do |f| %>
+	<div class="alert alert-block">  
+		<%= f.error_messages %>
+	</div>
 	<div class="text_field">
 		<%= f.label :title%>
 		<%= f.text_field :title%>
@@ -11,12 +14,20 @@
 	</div>
 	<div class="dropdown">
 		<%= f.label :start_date%>
-		<%= date_select :start_date, :start_date %>
+		<%= f.date_select :start_date %>
 	</div>
 	<div class="dropdown">
 		<%= f.label :end_date%>
-		<%= date_select :end_date, :end_date %>
+		<%= f.date_select :end_date %>
+	</div><br/>
+	<span class="help-block">Välj användare som ska ingå ingå i projektet.</span>
+	<div class="checkbox">
+		<% @users.each do |user| %>
+	    	<%= check_box_tag "project[members][]", user.id, '1', :id => "user_#{user.id}" %> 
+	    	<%= label_tag "user_#{user.id}", user.first_name + ' ' + user.last_name, :class => "checkbox" %>
+		<% end %>
 	</div>
+</div>
 	<div class="submit">
 		<%= f.submit "Spara" %>
 	</div>
