@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130210170816) do
+ActiveRecord::Schema.define(:version => 20130211211234) do
 
   create_table "projects", :force => true do |t|
     t.integer  "user_id"

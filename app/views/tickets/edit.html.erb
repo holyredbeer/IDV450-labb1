@@ -1,5 +1,4 @@
-<h1>Skapa ny ticket</h1>
-
+<h1>Ändra ticket</h1>
 
 <%= form_for @ticket do |f| %>
 	<div class="alert alert-block">  
@@ -21,12 +20,9 @@
 		<%= f.label :end_date%>
 		<%= f.date_select :end_date %>
 	</div><br/>
-	<span class="help-block">Välj användare som ska ingå ingå i projektet.</span>
 	<div class="selectbox">
-		<%= f.select :ticket_status_id, options_from_collection_for_select(TicketStatus.all, :id, :status_name) %>
+		<%= f.select :ticket_status_id, options_from_collection_for_select(TicketStatus.all, :id, :status_name, @ticket.ticket_status_id) %>
 	</div>
-	<%= f.hidden_field :project_id, :value => @project.id %>
-	<%= @project.id %>
 </div>
 	<div class="submit">
 		<%= f.submit "Spara" %>

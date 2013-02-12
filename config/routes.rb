@@ -11,13 +11,22 @@ Ampta::Application.routes.draw do
 
   # match '/users/create' => 'users#create', :as => :users_create
 
-  match "/projects/manage" => "projects#manage", :as => 'manage_projects'
-  resources :projects
+  resources :projects do
+    collection do
+      get "manage" 
+    end 
+  end
 
-  # match 'projects/manage', to: 'projects#users_projects, as: 'manage_projects'
-  
-  resources :tickets
-  resources :projects_users
+  resources :tickets do
+    collection do
+      get "manage" 
+    end 
+  end
+
+  post "tickets/new" => "tickets#new"
+  post "tickets/update_status" => "tickets#update_status"
+
+  resources :projects_user
   resources :users
 
   # Sample of regular route:

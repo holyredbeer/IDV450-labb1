@@ -2,9 +2,21 @@
 
 <div id="ticket_area">
 	<strong>Ticket-id:</strong> <%= @ticket.id %><br/>
-	<strong>Tillhör projekt:</strong> <%= @ticket.project_id %> // behöver fixas<br/>
+	<strong>Tillhör projekt:</strong> <%= @project.title %><br/>
 	<strong>Beskrivning:</strong> <%= @ticket.description %><br/>
 	<strong>Startdatum:</strong> <%= @ticket.start_date%><br/>
 	<strong>Slutdatum:</strong> <%= @ticket.end_date%><br/>
-	<strong>Status:</strong> <%= @ticket.ticket_status_id %> // behöver fixas<br/>
+
+	<% if check_if_owner(@ticket, current_user) %>
+		<%= form_tag(:controller => "tickets", :action => "update_status") do %>
+
+        	<div class="selectbox">
+				<%= select_tag :ticket_status_id, options_from_collection_for_select(TicketStatus.all, :id, :status_name, @ticket.ticket_status_id) %>
+			</div>
+			<%= hidden_field_tag :ticket_id, @ticket.id %>
+        	<%= submit_tag "Updatera status", :name => nil %>
+        <% end %>
+	<% else %>
+		<strong>Status:</strong> <%= @ticket_status.status_name %><br/>
+	<% end %>
 </div>

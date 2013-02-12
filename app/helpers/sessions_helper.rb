@@ -9,6 +9,13 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def is_logged_in
+    if !current_user
+      redirect_to root_path
+      flash[:error] = 'Det kravs att du ar inloggad!'
+    end
+  end
+
   def current_user=(user)
     @current_user = user
   end

@@ -2,11 +2,11 @@
 
 <div id="project_area">
 	<% @users_projects.each do |project| %>
-		<h4>
-			<%= link_to project.title, projects_path(:project => project.id), :class=> "manage_project_link" %>
+		<h5>
+			<%= link_to project.title, project_path(project.id), :class=> "manage_project_link" %>
 			<%= button_to "Radera", project, :method=>:delete, :class=> "btn remove_button", :confirm=>"Are you sure?" %>
-			<%= button_to "Redigera", edit_project_path, :class=> "btn edit_button" %>
+			<%= link_to "Redigera", edit_project_path(project), :class=> "btn edit_button" %>
 			<br/>
-		</h4>
+		</h5>
 	<% end %>
 </div>

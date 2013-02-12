@@ -1,18 +1,10 @@
 class ProjectsController < ApplicationController
 
-	before_filter :confirm_logged_in, :except => [:login, :attempt_login]
-
-	def confirm_logged_in
-		#
-	end
+	before_filter :is_logged_in, :except => [:index, :show]
 
 	def index
 	  @projects = Project.all
-
-	  if signed_in?
-	    @users_projects = Project.where(:user_id => current_user.id)
-	  end
-
+	  # @user_is_member = ProjectsUser.where(:user_id => current_user.id) d
 	end
 
 	def new
@@ -25,7 +17,7 @@ class ProjectsController < ApplicationController
 	  @project = Project.new(params[:project].merge(:user_id => current_user.id))
 
 	  if @project.save
-		@project_members = Projects_users.new
+		@project_members = ProjectsUser.new
 		
 		@members.each do |member|
 		  user = User.find(member)
@@ -40,14 +32,16 @@ class ProjectsController < ApplicationController
 	end
 
 	def edit
-
+		@project = Project.find(params[:id])
+		@users = User.all
 	end
 
 	def update
 		@project = Project.find(params[:id])
 
 		if @project.update_attributes(params[:project])
-			redirect_to users_projects_path
+
+			redirect_to manage_projects_path
 			flash.now[:success] = 'Projektet redigerades.' # Not quite right!
 		else
 			render :action => "edit"
@@ -59,8 +53,11 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@project = Project.find(params[:id])
-		# @projects_users = Projects_users.find(:project_id => @project.id)
+		@project_id = params[:id]
+
+		@project = Project.find(@project_id)
+		@projects_users = @project.users
+		@projects_tickets = Ticket.where(:project_id => @project_id)
 	end
 
 	def destroy

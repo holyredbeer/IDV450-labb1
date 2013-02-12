@@ -5,5 +5,18 @@
 	<p><strong>Startdatum:</strong> <%= @project.start_date %></p>
 	<p><strong>Slutdatum:</strong> <%= @project.end_date %></p>
 
-	<%= button_to "Lägg till ticket", new_ticket_path, :class=> "btn edit_button" %>
+	<h5>Medlemmar i projektet:</h5>
+	<% @projects_users.each do |user| %>
+		<%= user.first_name + ' ' + user.last_name %><br/>
+	<% end %>
+
+	<h5>Tickets knutna till projektet:</h5>
+	<% @projects_tickets.each do |ticket| %>
+		<%= link_to ticket.title, ticket_path(ticket.id) %><br/>
+	<% end %>
+
+	<%= form_tag(:controller => "tickets", :action => "new") do %>
+        <%= hidden_field_tag :project_id, @project.id %>
+        <%= submit_tag "Skapa ny ticket", :name => nil %>
+	<% end %>
 </div>

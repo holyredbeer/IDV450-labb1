@@ -4,6 +4,29 @@
 
 #ticket_area {
 	background: #fff;
-	width: 450px;
+	width: 550px;
 	padding: 15px;
+}
+
+.remove_button {
+	position: absolute;
+	left: 420px;
+}
+
+.edit_button {
+	position: absolute;
+	left: 510px;
+}
+
+.manage_ticket_link {
+	width: 200px;
+}
+
+.ticket_project_name {
+	position: absolute;
+	left: 310px;
+}
+
+.manage_ticket_link, .remove_button, .edit_button {
+	float: left;
 }

@@ -1,10 +1,36 @@
 <h1>Alla projekt</h1>
 
-<% @projects.each do |project| %>
-	<%= link_to (project.title), project_path(project) %><br />
-<% end %>
-
-<% if signed_in? %>
-  <%= link_to "Profile", user_path(current_user) %>
-  <%= current_user.first_name %>
-<% end %>
+<div id="project_area">
+	<% @projects.each do |project| %>
+			<div class="project_container">
+				<% if signed_in? %>
+					<% if check_if_member(project, current_user) %>
+						<div class="not_users_project label label-info">
+							Medlem
+						</div>
+						<div class="project_name_div">
+							<%= link_to (project.title), project_path(project) %><br />
+						</div>
+					<% elsif project.user_id == current_user.id %>
+						<div class="users_project label label-success">
+							Ägare
+						</div>
+						<div class="project_name_div">
+							<%= link_to (project.title), project_path(project) %><br />
+						</div>
+					<% else %>
+						<div class="users_project label label-error">
+							Ej medlem
+						</div>
+						<div class="project_name_div">
+							<%= project.title %><br />
+						</div>
+					<% end %>
+				<% else %>
+					<div class="project_name_div_logged_out">
+						<%= project.title %> <br />
+					</div>
+				<% end %>
+			</div>
+	<% end %>
+</div>

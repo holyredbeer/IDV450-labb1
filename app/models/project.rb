@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  has_and_belongs_to_many :users #, :class_name => 'User'
+  has_and_belongs_to_many :users # => , :class_name => 'User'
 
   belongs_to :user
   has_many :tickets, :dependent => :destroy
@@ -11,5 +11,5 @@ class Project < ActiveRecord::Base
   validates :end_date, :presence => { :message => "Du maste valja ett slutdatum" }
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :user_id, :title, :description, :start_date, :end_date
+  attr_accessible :user_id, :title, :description, :start_date, :end_date, :user_ids
 end

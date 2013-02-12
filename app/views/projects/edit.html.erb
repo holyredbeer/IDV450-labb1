@@ -1,7 +1,6 @@
-<h1>Skapa ny ticket</h1>
+<h1>Ändra projekt</h1>
 
-
-<%= form_for @ticket do |f| %>
+<%= form_for @project do |f| %>
 	<div class="alert alert-block">  
 		<%= f.error_messages %>
 	</div>
@@ -22,11 +21,13 @@
 		<%= f.date_select :end_date %>
 	</div><br/>
 	<span class="help-block">Välj användare som ska ingå ingå i projektet.</span>
-	<div class="selectbox">
-		<%= f.select :ticket_status_id, options_from_collection_for_select(TicketStatus.all, :id, :status_name) %>
+	<div class="checkbox">
+		<% @users.each do |user| %>
+	    	<% should_be_checked = @project.users.include?(user) %>
+			<%= check_box_tag "project[user_ids][]", user.id, should_be_checked, :id => "user_#{user.id}" %>
+	    	<%= label_tag "user_#{user.id}", user.first_name + ' ' + user.last_name, :class => "checkbox" %>
+		<% end %>
 	</div>
-	<%= f.hidden_field :project_id, :value => @project.id %>
-	<%= @project.id %>
 </div>
 	<div class="submit">
 		<%= f.submit "Spara" %>

@@ -1,8 +1,4 @@
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </a>
+
 
   <!-- Your site name for the upper left corner of the site -->
   <a class="brand">AMPTA</a>
@@ -25,6 +21,7 @@
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">Inloggad som: <strong><%= current_user.first_name %> </strong><strong class="caret"></strong></a>
           <div class="dropdown-menu account_dropdown">
             <%= link_to "Visa tickets", tickets_path%><br/>
+            <%= link_to "Hantera tickets", manage_tickets_path%><br/>
             <%= link_to "Hantera projekt", manage_projects_path %><br/>
             <%= link_to "Logga ut", signout_path, method: "delete"%>
         <% else %>
