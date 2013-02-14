@@ -1,5 +1,8 @@
 class Ticket < ActiveRecord::Base
-  belongs_to :ticket_type
+  belongs_to :ticket_types
+  belongs_to :project
+  belongs_to :projects
+
   attr_accessible :project_id, :ticket_status_id, :user_id, :title, :description, :start_date, :end_date
   
   validates :user_id, presence: true

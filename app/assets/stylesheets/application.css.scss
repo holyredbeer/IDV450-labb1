@@ -39,10 +39,6 @@ body {
 	margin-left: 30px;
 }
 
-#errorExplanation {
-	background: red;
-}
-
 #image_thumbs {
 	position: relative;
 	top: 25px;
@@ -52,17 +48,7 @@ body {
 .field_with_errors {
 	display: inline;
 	margin: 0;
-	background-color: red;
-}
 
-.field_with_errors input {
-	border: 3px solid red;
-	background: blue;
-	display: none;
-}
-
-.field_with_errors checkbox {
-	border: 3px solid red;
 }
 
 #filter_div {

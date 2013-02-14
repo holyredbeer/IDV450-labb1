@@ -4,7 +4,6 @@ class Project < ActiveRecord::Base
   # belongs_to :user
 
   has_many :projects_users
-
   has_many :tickets, :dependent => :destroy
 
   validates :user_id, presence: true
@@ -14,5 +13,5 @@ class Project < ActiveRecord::Base
   validates :end_date, :presence => { :message => "You must choose an end date" }
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :user_id, :title, :description, :start_date, :end_date, :user_ids
+  attr_accessible :user_id, :title, :description, :start_date, :end_date, :user_ids, :project_id
 end

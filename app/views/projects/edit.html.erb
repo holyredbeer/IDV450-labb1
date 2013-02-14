@@ -2,36 +2,44 @@
 <i class="icon-folder-open" id="project_icon_on_project"></i>
 <h4 id="title">Edit project</h4>
 
-<%= form_for @project do |f| %>
-	<div class="alert alert-block">  
-		<%= f.error_messages %>
+<div id="project_area">
+	<% if @project.errors.any? %>
+	<div id="error_messages">
+		<h4><%= pluralize(@project.errors.count, "errors") %> in the form. The project could not be saved.</h4>
+		<ul>
+			<% @project.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
 	</div>
-	<div class="text_field">
-		<%= f.label :title%>
-		<%= f.text_field :title%>
-	</div>
-	<div class="text_field">
-		<%= f.label :description%>
-		<%= f.text_field :description%>
-	</div>
-	<div class="dropdown">
-		<%= f.label :start_date%>
-		<%= f.date_select :start_date %>
-	</div>
-	<div class="dropdown">
-		<%= f.label :end_date%>
-		<%= f.date_select :end_date %>
-	</div><br/>
-	<span class="help-block">Choose users that should be members in the project</span>
-	<div class="checkbox">
-		<% @users.each do |user| %>
-	    	<% should_be_checked = @project.users.include?(user) %>
-			<%= check_box_tag "project[user_ids][]", user.id, should_be_checked, :id => "user_#{user.id}" %>
-	    	<%= label_tag "user_#{user.id}", user.first_name + ' ' + user.last_name, :class => "checkbox" %>
-		<% end %>
-	</div>
+	<% end %>
+	<%= form_for @project do |f| %>
+		<div class="text_field">
+			<%= f.label :title%>
+			<%= f.text_field :title%>
+		</div>
+		<div class="text_field">
+			<%= f.label :description%>
+			<%= f.text_field :description%>
+		</div>
+		<div class="dropdown">
+			<%= f.label :start_date%>
+			<%= f.date_select :start_date %>
+		</div>
+		<div class="dropdown">
+			<%= f.label :end_date%>
+			<%= f.date_select :end_date %>
+		</div><br/>
+		<span class="help-block">Choose users that should be members in the project</span>
+		<div class="checkbox">
+			<% @users.each do |user| %>
+		    	<% should_be_checked = @project.users.include?(user) %>
+				<%= check_box_tag "project[user_ids][]", user.id, should_be_checked, :id => "user_#{user.id}" %>
+		    	<%= label_tag "user_#{user.id}", user.first_name + ' ' + user.last_name, :class => "checkbox" %>
+			<% end %>
+		</div>
+		<div class="submit">
+			<%= f.submit "Save", :class => "btb" %>
+		</div>
+	<% end %>
 </div>
-	<div class="submit">
-		<%= f.submit "Save" %>
-	</div>
-<% end %>

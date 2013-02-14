@@ -4,7 +4,7 @@ Ampta::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  resources :sessions, only: [:new, :create, :destroy]
+  # resources :sessions, only: [:new, :create, :destroy]
 
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
@@ -13,7 +13,7 @@ Ampta::Application.routes.draw do
 
   resources :projects do
     collection do
-      get "manage" 
+      get "manage"
     end 
   end
 

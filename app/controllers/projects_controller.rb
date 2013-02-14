@@ -4,23 +4,19 @@ class ProjectsController < ApplicationController
 	before_filter :check_if_owner_or_member, :only => [:show]
 	before_filter :check_if_owner, :only => [:edit, :update, :destroy]
 
-	def is_owner?
-	  Project.exists?(id: params[:id], user_id: current_user.id)
-	end
-
-	def is_member?
-	  ProjectsUser.exists?(project_id: params[:id], user_id: current_user.id)
-	end
-
 	def check_if_owner_or_member
-	  unless is_owner? || is_member?
+	  @project_id = params[:id]
+
+	  unless is_owner_of_project?(@project_id) || is_member_of_project?(@project_id)
 	    redirect_to root_path
 	    flash[:error] = "You don't have permission to the project!"
 	  end
 	end
 
   	def check_if_owner
-  		unless is_owner?
+  		@project_id = params[:id]
+
+  		unless is_owner_of_project?(@project_id)
   			redirect_to root_path
 	      	flash[:error] = "You don't have permission to the project!"
   		end
@@ -51,12 +47,14 @@ class ProjectsController < ApplicationController
 	end
 
 	def new
-	  @project = Project.new
+	  @project = Project.new()
 	  @users = (current_user.blank? ? User.all : User.find(:all, :conditions => ["id != ?", current_user.id]))
 	end
 
 	def create
 	  @members = params[:project].delete(:members)
+	  @users = params[:project].delete(:users)
+	  
 	  @project = Project.new(params[:project].merge(:user_id => current_user.id))
 
 	  if @project.save
@@ -69,7 +67,6 @@ class ProjectsController < ApplicationController
 
     	redirect_to @project
   	  else
-    	@users = (current_user.blank? ? User.all : User.find(:all, :conditions => ["id != ?", current_user.id]))
         render :new
   	  end
 	end

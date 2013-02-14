@@ -1,6 +1,28 @@
 class TicketsController < ApplicationController
 
 	before_filter :is_logged_in
+	before_filter :check_if_owner_or_member, :only => [:show]
+	before_filter :check_if_owner, :only => [:edit, :update, :destroy]
+
+	def check_if_owner_or_member
+	  @ticket_id = params[:id]
+	  @project_id = Ticket.find(@ticket_id).project_id
+
+	  unless is_owner_of_project?(@project_id) || is_member_of_project?(@project_id)
+	    redirect_to root_path
+		flash[:error] = "You don't have permission to the ticket!"
+	  end
+	end
+
+	def check_if_owner
+	  @ticket_id = params[:id]
+	  @project_id = Ticket.find(@ticket_id).project_id
+
+      unless is_owner_of_project?(@project_id) || is_owner_of_ticket?(@ticket_id)
+        redirect_to root_path
+		flash[:error] = "You don't have permission to the ticket!"
+	  end
+	end
 
 	def index
 	  @tickets = Ticket.all
@@ -18,19 +40,19 @@ class TicketsController < ApplicationController
 	end
 
 	def new
-	  @ticket = Ticket.new
-	  @id = params[:project_id]
-
+	  @ticket = Ticket.new(:project_id => params[:project_id])
 	end
 
 	def create
+
 	  @ticket = Ticket.new(params[:ticket].merge(:user_id => current_user.id))
+	  @id = params[:project_id] # but make sure it is under this key in params
 
 	  if @ticket.save
 		redirect_to @ticket
-		  else
-		render :new
-		  end
+      else
+ 		 render :new
+	  end
 	end
 
 	def edit

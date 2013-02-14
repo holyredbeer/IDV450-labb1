@@ -16,20 +16,26 @@
 
 	<%= form_for @project, :validate => true do |f| %>
 
-		<%= f.label :title, :class => "control-label" %>
-		<%= f.text_field :title%>
+		<div class="text_field">
+			<%= f.label :title, :class => "control-label" %>
+			<%= f.text_field :title%>
+		</div>
 
-		<%= f.label :description, :class => "control-label"%>
-		<%= f.text_field :description%>
+		<div class="text_field">
+			<%= f.label :description, :class => "control-label"%>
+			<%= f.text_field :description%>
+		</div>
 
-		<%= f.label :start_date, :class => "control-label"%>
-		<%= f.date_select :start_date, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' }  %>
-
-
-		<%= f.label :end_date, :class => "control-label"%>
-		<%= f.date_select :end_date, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' }  %>
+		<div class="select">
+			<%= f.label :start_date, :class => "control-label"%>
+			<%= f.date_select :start_date, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' }  %>
+		</div>
+		<div class="select">
+			<%= f.label :end_date, :class => "control-label"%>
+			<%= f.date_select :end_date, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' }  %>
+		</div>
 		<br/>
-		
+
 		<span class="help-block">Choose members for the project.</span>
 		<div class="control-group">
 			<div class="checkbox">
@@ -39,6 +45,7 @@
 				<% end %>
 			</div>
 		</div>
+		<%= f.hidden_field :users, :value => @users %>
 		<div class="submit">
 			<%= f.submit "Save", :id => "submit_new_project", :class => "btn", :id => "project_button"%>
 		</div>

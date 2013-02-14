@@ -2,31 +2,39 @@
 <i class="icon-tags" id="ticket_icon_on_ticket"></i>
 <h4 id="title">Edit ticket</h4>
 
-<%= form_for @ticket do |f| %>
-	<div class="alert alert-block">  
-		<%= f.error_messages %>
+<div id="project_area">
+	<% if @ticket.errors.any? %>
+	<div id="error_messages">
+		<h4><%= pluralize(@ticket.errors.count, "errors") %> in the form. The project could not be saved.</h4>
+		<ul>
+			<% @ticket.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
 	</div>
-	<div class="text_field">
-		<%= f.label :title%>
-		<%= f.text_field :title%>
-	</div>
-	<div class="text_field">
-		<%= f.label :description%>
-		<%= f.text_field :description%>
-	</div>
-	<div class="dropdown">
-		<%= f.label :start_date%>
-		<%= f.date_select :start_date %>
-	</div>
-	<div class="dropdown">
-		<%= f.label :end_date%>
-		<%= f.date_select :end_date %>
-	</div><br/>
-	<div class="selectbox">
-		<%= f.select :ticket_status_id, options_from_collection_for_select(TicketStatus.all, :id, :status_name, @ticket.ticket_status_id) %>
-	</div>
+	<% end %>
+	<%= form_for @ticket do |f| %>
+		<div class="text_field">
+			<%= f.label :title%>
+			<%= f.text_field :title%>
+		</div>
+		<div class="text_field">
+			<%= f.label :description%>
+			<%= f.text_field :description%>
+		</div>
+		<div class="dropdown">
+			<%= f.label :start_date%>
+			<%= f.date_select :start_date %>
+		</div>
+		<div class="dropdown">
+			<%= f.label :end_date%>
+			<%= f.date_select :end_date %>
+		</div><br/>
+		<div class="selectbox">
+			<%= f.select :ticket_status_id, options_from_collection_for_select(TicketStatus.all, :id, :status_name, @ticket.ticket_status_id) %>
+		</div>
+		<div class="submit">
+			<%= f.submit "Save", :class => "btn" %>
+		</div>
+	<% end %>
 </div>
-	<div class="submit">
-		<%= f.submit "Save" %>
-	</div>
-<% end %>
