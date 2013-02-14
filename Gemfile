@@ -26,6 +26,7 @@ gem 'simple_form'
 gem 'bootstrap-datepicker-rails'
 gem 'bcrypt-ruby', '3.0.1'
 gem "dynamic_form"
+gem 'client_side_validations'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

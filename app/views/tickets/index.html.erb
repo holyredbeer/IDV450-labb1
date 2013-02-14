@@ -1,10 +1,18 @@
-<h1>Alla tickets</h1>
+<% content_for :title, "All tickets" %>
+<i class="icon-tags" id="ticket_icon_on_ticket"></i>
+<h4 id="title">My tickets</h4>
 
-
-<div id="ticket_area">
+<div id="project_area">
 	<% @tickets.each do |ticket| %>
-		<h4>
-			<%= link_to ticket.title, ticket_path(ticket.id), :action => "show"%><br/>
-		</h4>
+		<div>
+			<i class="icon-tag ticket_icon"></i>
+			<%= link_to ticket.title, ticket_path(ticket.id), :action => "show	", :class=> "manage_ticket_link2" %>
+			
+			<i class="icon-info-sign ticket_project_icon"></i>
+			<span class="status_name"><%= TicketStatus.find(ticket.ticket_status_id).status_name %></span>
+
+			<i class="icon-folder-open ticket_project_icon"></i>
+			<span class="ticket_project_name"><%= Project.find(ticket.project_id).title %></span>
+		</div><br/>
 	<% end %>
 </div>

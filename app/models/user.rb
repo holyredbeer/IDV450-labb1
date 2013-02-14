@@ -2,8 +2,10 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password
   has_secure_password
 
-  has_and_belongs_to_many :projects
-  has_many :projects
+  has_many :projects, :through => :projects_users
+  
+  #has_many :projects
+
   has_many :tickets
 
   def project_tickets

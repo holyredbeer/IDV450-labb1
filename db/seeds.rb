@@ -6,7 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-ticket = TicketStatus.create(:status_name => "Bugg")
-ticket2 = TicketStatus.create(:status_name => "Ny feature")
-ticket3 = TicketStatus.create(:status_name => "Todo")
-ticket4 = TicketStatus.create(:status_name => "Stangd")
+pu = ProjectsUser.create(:user_id => 8, :project_id => 43)

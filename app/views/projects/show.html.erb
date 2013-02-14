@@ -1,22 +1,25 @@
-<h1><%= @project.title %></h1>
+<% content_for :title, "Project - #{@project.title}" %>
+<i class="icon-folder-open" id="project_icon_on_project"></i>
+<h4 id="title"><%= @project.title %></h4>
 
 <div id="project_area">
-	<p><strong>Beskrivning:</strong><br/><%= @project.description %></p>
-	<p><strong>Startdatum:</strong> <%= @project.start_date %></p>
-	<p><strong>Slutdatum:</strong> <%= @project.end_date %></p>
+	<p><strong>Description:</strong><br/><%= @project.description %></p>
+	<p><strong>Start date:</strong> <%= @project.start_date %></p>
+	<p><strong>End date:</strong> <%= @project.end_date %></p>
 
-	<h5>Medlemmar i projektet:</h5>
+	<h5>The project's members:</h5>
 	<% @projects_users.each do |user| %>
 		<%= user.first_name + ' ' + user.last_name %><br/>
 	<% end %>
 
-	<h5>Tickets knutna till projektet:</h5>
+	<h5>The project's tickets:</h5>
 	<% @projects_tickets.each do |ticket| %>
-		<%= link_to ticket.title, ticket_path(ticket.id) %><br/>
-	<% end %>
+		<i class="icon-tags project_icon"></i>
+		<%= link_to ticket.title, ticket_path(ticket.id), :class => "manage_project_link"  %><br/>
+	<% end %><br/>
 
 	<%= form_tag(:controller => "tickets", :action => "new") do %>
         <%= hidden_field_tag :project_id, @project.id %>
-        <%= submit_tag "Skapa ny ticket", :name => nil %>
+        <%= submit_tag "Create new ticket", :name => nil, :class => "btn" %>
 	<% end %>
 </div>

@@ -1,22 +1,40 @@
-<div id="ticket_area">
-	<h4>Dina tickets</h4>
+<% content_for :title, "Manage tickets" %>
+<i class="icon-tags" id="ticket_icon_on_ticket"></i>
+<h4 id="title">Manage tickets</h4>
+<div class="ticket_area">
 	<% @tickets.each do |ticket| %>
-		<h5>
+		<div>
+			<i class="icon-tag ticket_icon"></i>
 			<%= link_to ticket.title, ticket_path(ticket.id), :class=> "manage_ticket_link" %>
-			<%= button_to "Radera", ticket, :method=>:delete, :class=> "btn remove_button", :confirm=>"Are you sure?" %>
-			<%= link_to "Redigera", edit_ticket_path(ticket), :class=> "btn edit_button" %>
-			<br/>
-		</h5>
-	<% end %><br/>
 
-	<h4>Tickets som tillhör projekt du äger</h4>
-	<% @tickets_for_owned_projects.each do |ticket| %>
-		<h5>
-			<%= link_to ticket.title, ticket_path(ticket.id), :class=> "manage_ticket_link" %>
-			<div class="ticket_project_name">(<%= Project.find(ticket.project_id).title %>)</div>
-			<%= button_to "Radera", ticket, :method=>:delete, :class=> "btn remove_button", :confirm=>"Are you sure?" %>
-			<%= link_to "Redigera", edit_ticket_path(ticket), :class=> "btn edit_button" %>
+			<i class="icon-info-sign ticket_project_icon"></i>
+			<span class="status_name"><%= TicketStatus.find(ticket.ticket_status_id).status_name %></span>
+
+			<i class="icon-folder-open ticket_project_icon"></i>
+			<div class="ticket_project_name"><%= Project.find(ticket.project_id).title %></div>
+
+			<%= link_to "Delete", ticket, :method=>:delete, :class=> "btn ticket_remove_button btn btn-danger", :confirm=>"Are you sure?" %>
+			<%= link_to "Edit", edit_ticket_path(ticket), :class=> "btn ticket_edit_button" %>
 			<br/>
-		</h5>
+		</div><br/>
+	<% end %>
+</div><br/>
+<h4>Tickets that belongs to projects where you are Admin</h4>
+<div class="ticket_area">
+	<% @tickets_for_owned_projects.each do |ticket| %>
+		<div>
+			<i class="icon-tag ticket_icon"></i>
+			<%= link_to ticket.title, ticket_path(ticket.id), :class=> "manage_ticket_link" %>
+
+			<i class="icon-info-sign ticket_project_icon"></i>
+			<span class="status_name"><%= TicketStatus.find(ticket.ticket_status_id).status_name %></span>
+
+			<i class="icon-folder-open ticket_project_icon"></i>
+			<div class="ticket_project_name"><%= Project.find(ticket.project_id).title %></div>
+
+			<%= link_to "Delete", ticket, :method=>:delete, :class=> "btn ticket_remove_button btn btn-danger", :confirm=>"Are you sure?" %>
+			<%= link_to "Edit", edit_ticket_path(ticket), :class=> "btn ticket_edit_button" %>
+			<br/>
+		</div><br/>
 	<% end %>
 </div>

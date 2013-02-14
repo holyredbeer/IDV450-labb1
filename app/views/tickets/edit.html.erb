@@ -1,4 +1,6 @@
-<h1>Ändra ticket</h1>
+<% content_for :title, "Edit ticket - #{@ticket.title}" %>
+<i class="icon-tags" id="ticket_icon_on_ticket"></i>
+<h4 id="title">Edit ticket</h4>
 
 <%= form_for @ticket do |f| %>
 	<div class="alert alert-block">  
@@ -25,6 +27,6 @@
 	</div>
 </div>
 	<div class="submit">
-		<%= f.submit "Spara" %>
+		<%= f.submit "Save" %>
 	</div>
 <% end %>

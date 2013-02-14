@@ -11,16 +11,62 @@
  *= require_self
  *= require_tree .
  *= require bootstrap-datepicker
+ *= require bootstrap
  */
+
+body {
+	background-color: #99bb88 !important;
+}
 
 .container > .content {
 	min-height: 500px;
 	background-color: #eee;
-	padding: 20px;
+	padding: 30px;
 	-webkit-border-radius: 10px 10px 10px 10px;
 	   -moz-border-radius: 10px 10px 10px 10px;
 	        border-radius: 10px 10px 10px 10px;
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
 	   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
 	        box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+.jquery_form_error_message{
+  display: block;
+  margin-top: 3px;
+}
+
+#title {
+	margin-left: 30px;
+}
+
+#errorExplanation {
+	background: red;
+}
+
+#image_thumbs {
+	position: relative;
+	top: 25px;
+	left: 200px;
+}
+
+.field_with_errors {
+	display: inline;
+	margin: 0;
+	background-color: red;
+}
+
+.field_with_errors input {
+	border: 3px solid red;
+	background: blue;
+	display: none;
+}
+
+.field_with_errors checkbox {
+	border: 3px solid red;
+}
+
+#filter_div {
+	position: relative;
+	top: -35px;
+	left: 255px;
 }

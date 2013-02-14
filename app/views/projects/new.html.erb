@@ -1,34 +1,47 @@
-<h1>Skapa nytt projekt</h1>
+<% content_for :title, "Create new project - #{@project.title}" %>
+<i class="icon-folder-open" id="project_icon_on_project"></i>
+<h4 id="title">Create new project</h4>
 
-<%= form_for @project do |f| %>
-	<div class="alert alert-block">  
-		<%= f.error_messages %>
-	</div>
-	<div class="text_field">
-		<%= f.label :title%>
+<div id="project_area">
+	<% if @project.errors.any? %>
+		<div id="error_messages">
+			<h4><%= pluralize(@project.errors.count, "errors") %> in the form. The project could not be saved.</h4>
+			<ul>
+				<% @project.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<%= form_for @project, :validate => true do |f| %>
+
+		<%= f.label :title, :class => "control-label" %>
 		<%= f.text_field :title%>
-	</div>
-	<div class="text_field">
-		<%= f.label :description%>
+
+		<%= f.label :description, :class => "control-label"%>
 		<%= f.text_field :description%>
-	</div>
-	<div class="dropdown">
-		<%= f.label :start_date%>
-		<%= f.date_select :start_date %>
-	</div>
-	<div class="dropdown">
-		<%= f.label :end_date%>
-		<%= f.date_select :end_date %>
-	</div><br/>
-	<span class="help-block">Välj användare som ska ingå ingå i projektet.</span>
-	<div class="checkbox">
-		<% @users.each do |user| %>
-	    	<%= check_box_tag "project[members][]", user.id, '1', :id => "user_#{user.id}" %> 
-	    	<%= label_tag "user_#{user.id}", user.first_name + ' ' + user.last_name, :class => "checkbox" %>
-		<% end %>
+
+		<%= f.label :start_date, :class => "control-label"%>
+		<%= f.date_select :start_date, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' }  %>
+
+
+		<%= f.label :end_date, :class => "control-label"%>
+		<%= f.date_select :end_date, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' }  %>
+		<br/>
+		
+		<span class="help-block">Choose members for the project.</span>
+		<div class="control-group">
+			<div class="checkbox">
+				<% @users.each do |user| %>
+			    	<%= check_box_tag "project[members][]", user.id, '1', :id => "user_#{user.id}" %> 
+			    	<%= label_tag "user_#{user.id}", user.first_name + ' ' + user.last_name, :class => "checkbox" %>
+				<% end %>
+			</div>
+		</div>
+		<div class="submit">
+			<%= f.submit "Save", :id => "submit_new_project", :class => "btn", :id => "project_button"%>
+		</div>
+	<% end %>
 	</div>
 </div>
-	<div class="submit">
-		<%= f.submit "Spara" %>
-	</div>
-<% end %>

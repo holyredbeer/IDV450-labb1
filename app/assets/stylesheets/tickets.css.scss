@@ -2,29 +2,79 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#ticket_area {
-	background: #fff;
-	width: 550px;
-	padding: 15px;
+.ticket_area {
+	border-radius: 5px;
+	background: #ddd;
+	width: 94%;
+	margin-top: 30px;
+	padding: 25px 25px 10px 25px;
+	position: relative;
 }
 
-.remove_button {
-	position: absolute;
-	left: 420px;
+.ticket_name_link {
+	float: left;
 }
 
-.edit_button {
-	position: absolute;
-	left: 510px;
+.status_name {
+	float: left;
+}
+
+.ticket_icon {
+	float: left;
+	margin-right: 10px;
+}
+
+#ticket_icon_on_ticket {
+	float: left;
+	position: relative;
+	top: 10px;
+}
+
+#project_submit_button {
+	margin-top: 10px;
+}
+
+#ticket_type {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.ticket_project_icon {
+	float: left;
+}
+
+.ticket_remove_button {
+	float: right;
+}
+
+.ticket_edit_button {
+	float: right;
+	margin-right: 5px;
+}
+
+.manage_ticket_link, .manage_ticket_link2 {
+	float: left;
+	text-transform: capitalize;
 }
 
 .manage_ticket_link {
-	width: 200px;
+	width: 350px;
+}
+
+.manage_ticket_link2 {
+	width: 500px;
 }
 
 .ticket_project_name {
-	position: absolute;
-	left: 310px;
+	float: left;
+	margin-left: 10px;
+	text-transform: capitalize;
+}
+
+.status_name {
+	width: 100px;
+	float: left;
+	margin-left: 10px;
 }
 
 .manage_ticket_link, .remove_button, .edit_button {

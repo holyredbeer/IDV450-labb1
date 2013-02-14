@@ -12,15 +12,15 @@ class TicketsController < ApplicationController
 	  @project = Project.find(@ticket.project_id) # find en, where många?
 	end
 
-	def new
-	  @ticket = Ticket.new
-	  @id = params[:project_id]
-	  @project = Project.find(@id)
-	end
-
 	def manage
 	  @tickets = current_user.tickets
 	  @tickets_for_owned_projects = current_user.project_tickets
+	end
+
+	def new
+	  @ticket = Ticket.new
+	  @id = params[:project_id]
+
 	end
 
 	def create
@@ -29,7 +29,7 @@ class TicketsController < ApplicationController
 	  if @ticket.save
 		redirect_to @ticket
 		  else
-	    render :new
+		render :new
 		  end
 	end
 
@@ -43,7 +43,7 @@ class TicketsController < ApplicationController
 		if @ticket.update_attributes(params[:ticket])
 
 			redirect_to @ticket
-			flash.now[:success] = 'Din ticket redigerades.' # Not quite right!
+			flash.now[:success] = 'Your ticket was successfully edited.' # Not quite right!
 		else
 			render :action => "edit"
 		end
@@ -57,7 +57,7 @@ class TicketsController < ApplicationController
 		if @ticket.save
 
 			redirect_to @ticket
-			flash.now[:success] = 'Projektet redigerades.' # Not quite right!
+			flash.now[:success] = 'The ticket was successfully edited.' # Not quite right!
 		else
 			redirect_to @ticket
 		end	
@@ -75,10 +75,10 @@ class TicketsController < ApplicationController
 	  if @ticket = Ticket.find(params[:id])
 	  	@ticket.destroy
 	  	redirect_to manage_tickets_path
-	  	flash.now[:success] = 'Projektet togs bort' # Not quite right!
+	  	flash.now[:success] = 'The ticket was deleted.' # Not quite right!
 	  else
 	  	redirect_to users_tickets_path
-	  	flash.now[:error] = 'Nagot gick snett. Projektet kunde inte hittas.'
+	  	flash.now[:error] = "Something went wrong. Could'nt find the ticket."
 	  end
 	end
 

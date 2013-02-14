@@ -1,36 +1,45 @@
-<h1>Alla projekt</h1>
+<% content_for :title, "All projects" %>
+<i class="icon-folder-open" id="project_icon_on_project"></i>
+<h4 id="title">All projects</h4>
 
 <div id="project_area">
+	<h5>Show only projects where you are:</h5>
+	<div id="filter_div">
+		<%= link_to "Admin", projects_path(:filter => "admin"), :class => "btn btn-success" %> 
+		<%= link_to "Member", projects_path(:filter => "member"), :class => "btn btn-info" %>
+		<%= link_to "Show All", projects_path, :class => "btn" %>
+	</div>
+
 	<% @projects.each do |project| %>
-			<div class="project_container">
-				<% if signed_in? %>
-					<% if check_if_member(project, current_user) %>
-						<div class="not_users_project label label-info">
-							Medlem
-						</div>
-						<div class="project_name_div">
-							<%= link_to (project.title), project_path(project) %><br />
-						</div>
-					<% elsif project.user_id == current_user.id %>
-						<div class="users_project label label-success">
-							Ägare
-						</div>
-						<div class="project_name_div">
-							<%= link_to (project.title), project_path(project) %><br />
-						</div>
-					<% else %>
-						<div class="users_project label label-error">
-							Ej medlem
-						</div>
-						<div class="project_name_div">
-							<%= project.title %><br />
-						</div>
-					<% end %>
+		<div class="project_container">
+			<% if signed_in? %>
+				<% if check_if_member(project, current_user) %>
+					<div class="users_project label label-info">
+						Member
+					</div>
+					<div class="project_name_div">
+						<%= link_to (project.title), project_path(project) %><br />
+					</div>
+				<% elsif project.user_id == current_user.id %>
+					<div class="users_project label label-success">
+						Admin
+					</div>
+					<div class="project_name_div">
+						<%= link_to (project.title), project_path(project) %><br />
+					</div>
 				<% else %>
-					<div class="project_name_div_logged_out">
-						<%= project.title %> <br />
+					<div class="users_project label label-error">
+						Not member
+					</div>
+					<div class="project_name_div">
+						<%= project.title %><br />
 					</div>
 				<% end %>
-			</div>
+			<% else %>
+				<div class="project_name_div_logged_out">
+					<%= project.title %> <br />
+				</div>
+			<% end %>
+		</div>
 	<% end %>
 </div>

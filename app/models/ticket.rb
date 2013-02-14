@@ -4,9 +4,9 @@ class Ticket < ActiveRecord::Base
   
   validates :user_id, presence: true
   validates :project_id, presence: true
-  validates :ticket_status_id, :presence => { :message => "Du maste ange en titel" }
-  validates :description, length: { minimum: 5, maximum: 450 }, :presence => { :message => "Du maste ange en beskrivning med minst 10 tecken" }
-  validates :start_date, :presence => { :message => "Du maste valja ett startdatum" }
-  validates :end_date, :presence => { :message => "Du maste valja ett slutdatum" }
+  validates :ticket_status_id, :presence => { :message => "You must give the ticket a title" }
+  validates :description, length: { minimum: 10, maximum: 450 }, :presence => { :message => "You must give the ticket a description (minimum 10 characters)" }
+  validates :start_date, :presence => { :message => "You must choose a start date" }
+  validates :end_date, :presence => { :message => "You must choose an end date" }
 
 end

@@ -1,4 +1,6 @@
-<h1>Ändra projekt</h1>
+<% content_for :title, "Edit project - #{@project.title}" %>
+<i class="icon-folder-open" id="project_icon_on_project"></i>
+<h4 id="title">Edit project</h4>
 
 <%= form_for @project do |f| %>
 	<div class="alert alert-block">  
@@ -20,7 +22,7 @@
 		<%= f.label :end_date%>
 		<%= f.date_select :end_date %>
 	</div><br/>
-	<span class="help-block">Välj användare som ska ingå ingå i projektet.</span>
+	<span class="help-block">Choose users that should be members in the project</span>
 	<div class="checkbox">
 		<% @users.each do |user| %>
 	    	<% should_be_checked = @project.users.include?(user) %>
@@ -30,6 +32,6 @@
 	</div>
 </div>
 	<div class="submit">
-		<%= f.submit "Spara" %>
+		<%= f.submit "Save" %>
 	</div>
 <% end %>

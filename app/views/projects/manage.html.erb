@@ -1,12 +1,14 @@
-<h1>Hantera projekt</h1>
+<% content_for :title, "Manage projects" %>
 
+<h4>Manage projects</h4>
 <div id="project_area">
 	<% @users_projects.each do |project| %>
-		<h4>
+		<div>
+			<i class="icon-folder-open project_icon"></i>
 			<%= link_to project.title, project_path(project), :class => "manage_project_link" %>
-			<%= link_to "Radera", project, :method=>:delete, :class => "btn remove_button", :confirm => "Are you sure?" %>
-			<%= link_to "Redigera", edit_project_path(project), :class => "btn edit_button" %>
+			<%= link_to "Delete", project, :method=>:delete, :class => "btn project_remove_button btn btn-danger", :confirm => "Are you sure?" %>
+			<%= link_to "Edit", edit_project_path(project), :class => "btn project_edit_button" %>
 			<br/>
-		</h4>
+		</div><br/>
 	<% end %>
 </div>

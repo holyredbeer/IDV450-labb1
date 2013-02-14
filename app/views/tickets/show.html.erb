@@ -1,20 +1,22 @@
-<h3><%= @ticket.title %></h3>
+<% content_for :title, "Ticket - #{@ticket.title}" %>
+<i class="icon-tags" id="ticket_icon_on_ticket"></i>
+<h4 id="title"><%= @ticket.title %></h4>
 
-<div id="ticket_area">
-	<strong>Ticket-id:</strong> <%= @ticket.id %><br/>
-	<strong>Tillhör projekt:</strong> <%= @project.title %><br/>
-	<strong>Beskrivning:</strong> <%= @ticket.description %><br/>
-	<strong>Startdatum:</strong> <%= @ticket.start_date%><br/>
-	<strong>Slutdatum:</strong> <%= @ticket.end_date%><br/>
+<div class="ticket_area">
+	<strong>Ticket id:</strong> <%= @ticket.id %><br/>
+	<strong>Belongs to project:</strong> <%= @project.title %><br/>
+	<strong>Description:</strong> <%= @ticket.description %><br/>
+	<strong>Start date:</strong> <%= @ticket.start_date%><br/>
+	<strong>End date:</strong> <%= @ticket.end_date%><br/>
 
 	<% if check_if_owner(@ticket, current_user) %>
 		<%= form_tag(:controller => "tickets", :action => "update_status") do %>
 
-        	<div class="selectbox">
+        	<div class="selectbox" id="ticket_type">
 				<%= select_tag :ticket_status_id, options_from_collection_for_select(TicketStatus.all, :id, :status_name, @ticket.ticket_status_id) %>
 			</div>
 			<%= hidden_field_tag :ticket_id, @ticket.id %>
-        	<%= submit_tag "Updatera status", :name => nil %>
+        	<%= submit_tag "Update status", :name => nil, :class => "btn" %>
         <% end %>
 	<% else %>
 		<strong>Status:</strong> <%= @ticket_status.status_name %><br/>

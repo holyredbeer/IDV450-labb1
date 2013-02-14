@@ -1,34 +1,41 @@
-<h1>Skapa ny ticket</h1>
+<% content_for :title, "Create new ticket" %>
+<i class="icon-tags" id="ticket_icon_on_ticket"></i>
+<h4 id="title">Create new ticket</h4>
 
+<div id="project_area">
+	<% if @ticket.errors.any? %>
+		<div id="error_messages">
+			<h4><%= pluralize(@ticket.errors.count, "errors") %> in the form. The project could not be saved.</h4>
+			<ul>
+				<% @ticket.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
 
-<%= form_for @ticket do |f| %>
-	<div class="alert alert-block">  
-		<%= f.error_messages %>
-	</div>
-	<div class="text_field">
-		<%= f.label :title%>
-		<%= f.text_field :title%>
-	</div>
-	<div class="text_field">
-		<%= f.label :description%>
-		<%= f.text_field :description%>
-	</div>
-	<div class="dropdown">
-		<%= f.label :start_date%>
-		<%= f.date_select :start_date %>
-	</div>
-	<div class="dropdown">
-		<%= f.label :end_date%>
-		<%= f.date_select :end_date %>
-	</div><br/>
-	<span class="help-block">Välj användare som ska ingå ingå i projektet.</span>
-	<div class="selectbox">
-		<%= f.select :ticket_status_id, options_from_collection_for_select(TicketStatus.all, :id, :status_name) %>
-	</div>
-	<%= f.hidden_field :project_id, :value => @project.id %>
-	<%= @project.id %>
+	<%= form_for @ticket do |f| %>
+		<div class="text_field">
+			<%= f.label :title %>
+			<%= f.text_field :title %>
+		</div>
+		<div class="text_field">
+			<%= f.label :description %>
+			<%= f.text_field :description %>
+		</div>
+			<%= f.label :start_date %>
+			<%= f.date_select :start_date, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' }  %>
+
+			<%= f.label :end_date %>
+			<%= f.date_select :end_date, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' }  %>
+
+		<span class="help-block">Choose category</span>
+		<div class="selectbox">
+			<%= f.select :ticket_status_id, options_from_collection_for_select(TicketStatus.all, :id, :status_name) %>
+		</div>
+		<%= f.hidden_field :project_id, :value => @project.id %>
+		<div class="submit">
+			<%= f.submit "Save", :class => "btn", :id=> "project_submit_button"%>
+		</div>
+	<% end %>
 </div>
-	<div class="submit">
-		<%= f.submit "Spara" %>
-	</div>
-<% end %>

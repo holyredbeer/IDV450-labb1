@@ -1,8 +1,11 @@
-<h2>Welcome to AMPTA – A Minimal Project Tracking Application</h2>
+<% content_for :title, "Welcome to AMPTA!" %>
 
-  <% if signed_in? %>
-    <%= link_to "Profile", user_path(current_user) %>
-  <% end %>
+<h3>Welcome to AMPTA – A Minimal Project Tracking Application</h3>
+
+  <div id="project_area">
+  	<p>Hello and welcome to this tremendous, awesome, minimal project management system, called AMPTA!</p><br/>
+  	<img src=<%=asset_path "thumbs.png"%> id="image_thumbs" />
+  </div>
 
   <% if flash[:notice] %>
 	<div class="notice"><%= flash[:notice] %></div>
