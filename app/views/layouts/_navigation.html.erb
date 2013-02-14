@@ -6,10 +6,10 @@
   <!-- Start of the nav bar content -->
   <div class="nav-collapse"><!-- Other nav bar content -->
   <ul class="nav">
-    <li class="active"><%= link_to 'Start', root_url %></li>
-    <li><%= link_to 'Projekt', projects_url %></li>
+    <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to 'Start', root_url %></li>
+    <li class="<%= 'active' if current_page?(projects_path) %>"><%= link_to 'Projects', projects_url %></li>
       <% if signed_in? %>
-        <li><%= link_to "Skapa projekt", new_project_path %>
+        <li class="<%= 'active' if current_page?(new_project_path) %>"><%= link_to "Create project", new_project_path %></li>
       <% end %>
   </ul>
 
@@ -18,24 +18,24 @@
       <li class="divider-vertical"></li>
       <li class="dropdown">
         <% if signed_in? %>
-          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Inloggad som: <strong><%= current_user.first_name %> </strong><strong class="caret"></strong></a>
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Signed in as: <strong><%= current_user.first_name %> </strong><strong class="caret"></strong></a>
           <div class="dropdown-menu account_dropdown">
-            <%= link_to "Visa tickets", tickets_path%><br/>
-            <%= link_to "Hantera tickets", manage_tickets_path%><br/>
-            <%= link_to "Hantera projekt", manage_projects_path %><br/>
-            <%= link_to "Logga ut", signout_path, method: "delete"%>
+            <i class="icon-tags project_icon"></i><%= link_to "My tickets", tickets_path%><br/>
+            <i class="icon-wrench project_icon"></i><%= link_to "Manage tickets", manage_tickets_path %><br/>
+            <i class="icon-wrench project_icon"></i><%= link_to "Manage projects", manage_projects_path %><br/>
+            <i class="icon-off project_icon"></i><%= link_to "Log out", signout_path, method: "delete"%>
         <% else %>
-          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Logga in <strong class="caret"></strong></a>
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Log in <strong class="caret"></strong></a>
           <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
             <%= form_for(:session, url: sessions_path) do |f| %>
 
               <%= f.label :email %>
-              <%= f.text_field(:email, :size => 30, :class => 'login_field', :placeholder => 'Användarnamn')%>
+              <%= f.text_field(:email, :size => 30, :class => 'login_field', :placeholder => 'Username')%>
 
               <%= f.label :password %>
-              <%= f.password_field(:password, :size => 30, :class => 'login_field', :placeholder => 'Lösenord')%>
+              <%= f.password_field(:password, :size => 30, :class => 'login_field', :placeholder => 'Password')%>
 
-              <%= f.submit "Logga in", :class => 'login_submit btn btn-primary' %>
+              <%= f.submit "Log in", :class => 'login_submit btn btn-primary' %>
             <% end %>
         <% end %>
         </div>
