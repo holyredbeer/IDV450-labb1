@@ -28,6 +28,7 @@ Ampta::Application.routes.draw do
 
   resources :projects_user
   resources :users
+  resources :sessions
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

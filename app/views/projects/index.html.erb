@@ -3,12 +3,15 @@
 <h4 id="title">All projects</h4>
 
 <div id="project_area">
-	<h5>Show only projects where you are:</h5>
-	<div id="filter_div">
-		<%= link_to "Admin", projects_path(:filter => "admin"), :class => "btn btn-success" %> 
-		<%= link_to "Member", projects_path(:filter => "member"), :class => "btn btn-info" %>
-		<%= link_to "Show All", projects_path, :class => "btn" %>
-	</div>
+	<% if signed_in? %>
+		<h5>Show only projects where you are:</h5>
+
+		<div id="filter_div">
+			<%= link_to "Admin", projects_path(:filter => "admin"), :class => "btn btn-success" %> 
+			<%= link_to "Member", projects_path(:filter => "member"), :class => "btn btn-info" %>
+			<%= link_to "Show All", projects_path, :class => "btn" %>
+		</div>
+	<% end %>
 
 	<% @projects.each do |project| %>
 		<div class="project_container">

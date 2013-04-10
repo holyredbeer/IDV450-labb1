@@ -72,11 +72,13 @@ class ProjectsController < ApplicationController
 	end
 
 	def edit
+		logger.debug "VAG1: #{@users}"
 		@project = Project.find(params[:id])
 		@users = User.all
 	end
 
 	def update
+		logger.debug "VAG2: #{@users}"
 		@project = Project.find(params[:id])
 
 		if @project.update_attributes(params[:project])
@@ -84,6 +86,7 @@ class ProjectsController < ApplicationController
 			redirect_to manage_projects_path
 			flash.now[:success] = 'The project was successfully edited.' # Not quite right!
 		else
+			@users = User.all
 			render :action => "edit"
 		end
 	end
@@ -94,7 +97,6 @@ class ProjectsController < ApplicationController
 
 	def show
 		@project_id = params[:id]
-
 		@project = Project.find(@project_id)
 		@projects_users = @project.users
 		@projects_tickets = Ticket.where(:project_id => @project_id)
